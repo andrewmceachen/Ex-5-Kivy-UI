@@ -6,6 +6,7 @@ import os
 from kivy.app import App
 from kivy.core.window import Window
 from kivy.lang import Builder
+from kivy.properties import ObjectProperty
 from kivy.uix.screenmanager import ScreenManager, Screen
 
 from pidev.MixPanel import MixPanel
@@ -26,6 +27,7 @@ SCREEN_MANAGER = ScreenManager()
 MAIN_SCREEN_NAME = 'main'
 ADMIN_SCREEN_NAME = 'admin'
 
+buttonstate = "On"
 
 class ProjectNameGUI(App):
     """
@@ -47,13 +49,16 @@ class MainScreen(Screen):
     """
     Class to handle the main screen and its associated touch events
     """
+    buttonstate = ObjectProperty()
+    def pressed(self,buttonstate):
+        if buttonstate == "On":
+            buttonstate = "Off"
+        else:
+            buttonstate = "On"
+        return str(buttonstate)
 
-    def pressed(self):
-        """
-        Function called on button touch event for button with id: testButton
-        :return: None
-        """
-        print("Callback from MainScreen.pressed()")
+    def counter(self,val):
+        return str(int(val)+1)
 
     def admin_action(self):
         """

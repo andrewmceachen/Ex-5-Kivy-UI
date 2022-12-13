@@ -7,20 +7,20 @@
 
     DPEAButton:
         id: test_button
-        text: 'test'
+        text: 'On'
         size: 100, 100
         x: root.width * 0.75
         y: root.height * 0.5
         color: 0, 1, 0, 1
-        on_press: root.pressed()
+        on_press: self.text = root.pressed(self.text)
 
     DPEAButton:
-        text: "test2"
+        text: "0"
         size: 100, 100
         x: root.width * 0.25
         y: root.height * 0.5
         color: 1, 0, 0, 1
-        on_press: root.pressed()
+        on_press: self.text = root.counter(self.text)
 
     SelfUpdatingLabel:
         id: time_label
