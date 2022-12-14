@@ -53,8 +53,10 @@ class MainScreen(Screen):
     def pressed(self,buttonstate):
         if buttonstate == "On":
             buttonstate = "Off"
+            print("Button Toggled")
         else:
             buttonstate = "On"
+            print("Button Toggled")
         return str(buttonstate)
 
     def counter(self,val):
