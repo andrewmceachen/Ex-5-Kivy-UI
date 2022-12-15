@@ -8,6 +8,7 @@ from kivy.core.window import Window
 from kivy.lang import Builder
 from kivy.properties import ObjectProperty
 from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.uix.slider import Slider
 
 from pidev.MixPanel import MixPanel
 from pidev.kivy.PassCodeScreen import PassCodeScreen
@@ -26,8 +27,10 @@ MIXPANEL = MixPanel("Project Name", MIXPANEL_TOKEN)
 SCREEN_MANAGER = ScreenManager()
 MAIN_SCREEN_NAME = 'main'
 ADMIN_SCREEN_NAME = 'admin'
+NEW_SCREEN_NAME = 'balls'
 
 buttonstate = "On"
+buttonstate2 = "Motor On"
 
 class ProjectNameGUI(App):
     """
@@ -70,6 +73,19 @@ class MainScreen(Screen):
         """
         SCREEN_MANAGER.current = 'passCode'
 
+    def motor(self,buttonstate2):
+        if buttonstate2 == "Motor On":
+            buttonstate2 = "Motor Off"
+        else:
+            buttonstate2 = "Motor On"
+        return str(buttonstate2)
+
+    def balls(self):
+        SCREEN_MANAGER.current = NEW_SCREEN_NAME
+
+class NewScreen(Screen):
+    def mainbutton(self):
+        SCREEN_MANAGER.current = MAIN_SCREEN_NAME
 
 class AdminScreen(Screen):
     """
@@ -123,6 +139,7 @@ SCREEN_MANAGER.add_widget(MainScreen(name=MAIN_SCREEN_NAME))
 SCREEN_MANAGER.add_widget(PassCodeScreen(name='passCode'))
 SCREEN_MANAGER.add_widget(PauseScreen(name='pauseScene'))
 SCREEN_MANAGER.add_widget(AdminScreen(name=ADMIN_SCREEN_NAME))
+SCREEN_MANAGER.add_widget(NewScreen(name=NEW_SCREEN_NAME))
 
 """
 MixPanel

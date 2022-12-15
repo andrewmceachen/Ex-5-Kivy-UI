@@ -6,12 +6,11 @@
         size_hint: None, None
 
     DPEAButton:
-        id: test_button
         text: 'On'
         size: 100, 100
         x: root.width * 0.75
         y: root.height * 0.5
-        color: 0, 1, 0, 1
+        color: 1, .5, 0, 1
         on_press: self.text = root.pressed(self.text)
 
     DPEAButton:
@@ -19,26 +18,69 @@
         size: 100, 100
         x: root.width * 0.25
         y: root.height * 0.5
-        color: 1, 0, 0, 1
+        color: 1, 0, 1, 1
         on_press: self.text = root.counter(self.text)
 
     DPEAButton:
-        text: "Die"
-        size: 200,200
-        x: root.width * .1
-        y: root.height * .1
+        text: "kills witch"
+        size: 250,100
+        x: root.width * 0
+        y: root.height * 0
         color: 1,0,0,1
         on_press: root.shutdown()
 
-    SelfUpdatingLabel:
-        id: time_label
-        size_hint: None, None
-        font_size: 30
-        update_property: time.now
-        update_property_parameters: None
-        center_x: root.width * 0.5
-        center_y: root.height * 0.45
+    DPEAButton:
+        text: "Change Motor"
+        size: 100,100
+        x: root.width * .5
+        y: root.height * .5
         color: 1, 1, 1, 1
+        on_press: status.text = root.motor(status.text)
+
+    DPEAButton:
+        text: "Motor Status"
+        id: status
+        size: 100,100
+        x: root.width * .5
+        y: root.height * .25
+        color: 1, 1, 1, 1
+
+    Slider:
+        id: slider
+        size_hint: None,None
+        size: 400,30
+        center: root.width * 0.5, root.height * 0.75
+        min: 0
+        max: 100
+        sensitivity: 'handle'
+
+    Label:
+        id: slider_label
+        size_hint: None,None
+        font_size: 40
+        text: str(round(slider.value))
+        color: slider.value / 100, slider.value / 100, slider.value / 100, 1
         bold: True
         outline_width: self.font_size * 0.1
-        outline_color: 0, 0, 0
+        outline_color: 1, 0, 1
+        center_x: root.width * 0.5
+        center_y: root.height * 0.9
+
+    ImageButton:
+        id: imagebutton
+        source: "minecraft.png"
+        size: 200,200
+        on_press: root.balls()
+        x: root.width * 0.1
+        y: root.height * 0.5
+
+<NewScreen>
+    name: 'balls'
+
+    ImageButton:
+        id: imagebutton
+        source: "mcdonalds.png"
+        size: root.width*.5, root.height*.5
+        on_press: root.mainbutton()
+        x: root.width * 0
+        y: root.height * 0
