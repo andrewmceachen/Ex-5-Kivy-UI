@@ -9,6 +9,7 @@ from kivy.lang import Builder
 from kivy.properties import ObjectProperty
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.slider import Slider
+from kivy.animation import Animation
 
 from pidev.MixPanel import MixPanel
 from pidev.kivy.PassCodeScreen import PassCodeScreen
@@ -86,6 +87,12 @@ class MainScreen(Screen):
 class NewScreen(Screen):
     def mainbutton(self):
         SCREEN_MANAGER.current = MAIN_SCREEN_NAME
+
+    def glagas(self, *args):
+        animate = Animation(x=100) + Animation(y=100) + Animation(x=900) + Animation(y=400)
+        widget = self.ids.anim1
+        animate.start(widget)
+
 
 class AdminScreen(Screen):
     """

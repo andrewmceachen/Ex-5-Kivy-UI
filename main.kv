@@ -74,8 +74,18 @@
         x: root.width * 0.1
         y: root.height * 0.5
 
+
+
 <NewScreen>
     name: 'balls'
+
+    ImageButton:
+        id: anim1
+        source: "blue.png"
+        size: root.width * .2, root.height *.2
+        x: root.width * 0.8
+        y: root.height * 0.7
+        on_press: root.glagas()
 
     ImageButton:
         id: imagebutton
