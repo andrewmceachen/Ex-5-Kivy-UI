@@ -45,6 +45,15 @@
         y: root.height * .25
         color: 1, 1, 1, 1
 
+    DPEAButton:
+        text: "Joystick Status"
+        id: joystatus
+        size: 100,100
+        x: root.width * .8
+        y: root.height * .1
+        on_press: joystatus.text = root.joystick(joystatus.text)
+
+
     Slider:
         id: slider
         size_hint: None,None

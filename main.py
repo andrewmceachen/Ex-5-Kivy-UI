@@ -11,6 +11,7 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.slider import Slider
 from kivy.animation import Animation
 
+from pidev.Joystick import Joystick
 from pidev.MixPanel import MixPanel
 from pidev.kivy.PassCodeScreen import PassCodeScreen
 from pidev.kivy.PauseScreen import PauseScreen
@@ -32,6 +33,9 @@ NEW_SCREEN_NAME = 'balls'
 
 buttonstate = "On"
 buttonstate2 = "Motor On"
+joypos = "0.0, 0.0"
+
+joy = Joystick(0, True)
 
 class ProjectNameGUI(App):
     """
@@ -54,6 +58,7 @@ class MainScreen(Screen):
     Class to handle the main screen and its associated touch events
     """
     buttonstate = ObjectProperty()
+    joypos = ObjectProperty()
     def pressed(self,buttonstate):
         if buttonstate == "On":
             buttonstate = "Off"
@@ -73,6 +78,11 @@ class MainScreen(Screen):
         :return: None
         """
         SCREEN_MANAGER.current = 'passCode'
+
+    def joystick(self,joypos):
+        joypos = joy.get_axis('x'), joy.get_axis('y')
+        return "Position:" + str(joypos)
+
 
     def motor(self,buttonstate2):
         if buttonstate2 == "Motor On":
