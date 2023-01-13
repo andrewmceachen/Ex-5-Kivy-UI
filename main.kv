@@ -50,9 +50,24 @@
         id: joystatus
         size: 100,100
         x: root.width * .8
-        y: root.height * .1
+        y: root.height * 11.1
         on_press: joystatus.text = root.joystick(joystatus.text)
 
+    Label:
+        id: x
+        size_hint: .2,.1
+        font_size: 40
+        text: "0.0"
+        color: 1,0,1,1
+        pos_hint: {"center_x":.075,"center_y":.45}
+
+    Label:
+        id: y
+        size_hint: .2,.1
+        font_size: 40
+        text: "0.0"
+        color: 1,0,1,1
+        pos_hint: {"center_x":.2,"center_y":.45}
 
     Slider:
         id: slider

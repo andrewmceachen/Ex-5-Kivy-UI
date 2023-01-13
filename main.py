@@ -10,6 +10,7 @@ from kivy.properties import ObjectProperty
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.slider import Slider
 from kivy.animation import Animation
+from kivy.clock import Clock
 
 from pidev.Joystick import Joystick
 from pidev.MixPanel import MixPanel
@@ -34,6 +35,7 @@ NEW_SCREEN_NAME = 'balls'
 buttonstate = "On"
 buttonstate2 = "Motor On"
 joypos = "0.0, 0.0"
+pos = "waiting"
 
 joy = Joystick(0, True)
 
@@ -59,6 +61,11 @@ class MainScreen(Screen):
     """
     buttonstate = ObjectProperty()
     joypos = ObjectProperty()
+
+    def __init__(self,**kwargs):
+        Clock.schedule_interval(self.joyclock,.1)
+        print("clock schedule created")
+        super(MainScreen,self).__init__(**kwargs)
     def pressed(self,buttonstate):
         if buttonstate == "On":
             buttonstate = "Off"
@@ -82,6 +89,12 @@ class MainScreen(Screen):
     def joystick(self,joypos):
         joypos = joy.get_axis('x'), joy.get_axis('y')
         return "Position:" + str(joypos)
+
+    def joyclock(self,pos):
+        self.x_val,self.y_val = joy.get_both_axes()
+        self.ids.x.text = "x: " + str(round(self.x_val,2))
+        self.ids.y.text = "y: " + str(round(self.y_val, 2))
+
 
 
     def motor(self,buttonstate2):
